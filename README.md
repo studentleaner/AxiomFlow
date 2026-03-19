@@ -1,39 +1,22 @@
-# AxiomFlow
+# AxiomFlow (v1.0.0)
 
 AxiomFlow is the official usability layer built on top of **Axiom** and **ContextFlow**.
 
-It provides a beginner-friendly, high-level runtime, DSL helpers, and execution utilities while keeping the Axiom core compiler fully frozen and deterministic.
+It provides a beginner-friendly, high-level runtime, DSL helpers, execution utilities, and a thin local UI, while keeping the Axiom core compiler fully frozen and deterministic.
 
-AxiomFlow does NOT replace Axiom.  
-AxiomFlow does NOT modify Axiom.  
-AxiomFlow wraps Axiom.  
+**AxiomFlow does NOT replace Axiom.**  
+**AxiomFlow does NOT modify Axiom.**  
+**AxiomFlow wraps Axiom.**  
 
 Repository:  
 https://github.com/studentleaner/AxiomFlow
 
 ---
 
-## Philosophy
-
-The ecosystem is split into strict layers:
-
-- **Axiom** → Compiler  
-- **ContextFlow** → Runtime / Execution  
-- **AxiomFlow** → Usability / Runner / DSL / Integration  
-
-This separation guarantees:
-- deterministic execution
-- version locking
-- no hidden runtime logic
-- no framework leaks
-- enterprise reproducibility
-
----
-
 ## Architecture
 
 ```text
-User / CLI / UI
+User / Local UI / CLI
       ↓
   AxiomFlow
       ↓
@@ -46,174 +29,75 @@ ContextFlow (Execution Runtime)
 LLM / Tools / Memory
 ```
 
-AxiomFlow never changes Axiom internals.
-AxiomFlow never bypasses ExecutionPlan.
-AxiomFlow never executes workflows directly.
-
-All execution goes through ContextFlow.
-
 ---
 
-## Goals
+## Quickstart
 
-AxiomFlow exists to solve the usability gaps of Axiom:
-
-| Gap | Solution |
-|------|----------|
-| No execution runner | AxiomFlow Runner |
-| JSON too manual | DSL / templates |
-| No memory / RAG | ContextFlow bridge |
-| Not beginner friendly | High-level API |
-| No tooling | CLI helpers |
-| No ecosystem glue | Integration layer |
-
----
-
-## Non-Goals
-
-AxiomFlow will NOT:
-- modify Axiom schema
-- modify Axiom runtime
-- modify ExecutionPlan format
-- add execution inside Axiom
-- add memory inside Axiom
-- add RAG inside Axiom
-- add UI inside Axiom
-
-If a feature requires core change → rejected.
-
----
-
-## Roadmap (STRICT — 4 iterations only)
-
-The project must finish in 4 iterations.
-
-No extra phases allowed.
-No redesign allowed.
-No scope expansion allowed.
-
-### Iteration 1 — Runner Layer
-**Goal:** Provide simple execution API on top of Axiom + ContextFlow.
-
-**Features:**
-- `run(workflow, inputs)`
-- load registry
-- compile plan
-- execute via ContextFlow
-- adapter selection
-
-**Example:**
-```python
-from axiomflow import run
-
-run("workflow.support_router", inputs)
-```
-
-**Scope:** runner, contextflow bridge, adapter selection, config support. (No DSL yet)
-
-### Iteration 2 — DSL / Template Helpers
-**Goal:** Make workflows easier to write.
-
-**Features:**
-- YAML DSL
-- template generators
-- prompt helpers
-- workflow builder
-- schema scaffolding
-
-**Example:**
-```bash
-axiomflow init support_router
-```
-
-**Scope:** DSL parser, JSON generator, template presets, starter kits. (No UI yet)
-
-### Iteration 3 — CLI + Tooling
-**Goal:** Provide simple command interface.
-
-**Commands:**
-- `axiomflow run`
-- `axiomflow build`
-- `axiomflow validate`
-- `axiomflow search`
-- `axiomflow init`
-
-**Scope:** CLI wrapper, runner integration, registry integration, DSL integration. (No UI yet)
-
-### Iteration 4 — ContextFlow Integration + Memory / RAG helpers
-**Goal:** Bridge Axiom workflows to ContextFlow features.
-
-**Features:**
-- memory helpers
-- rag helpers
-- tool helpers
-- provider config
-- execution presets
-
-**Example:**
-```python
-run(
-    "workflow.support_router",
-    inputs,
-    memory=True,
-    rag=True,
-)
-```
-
-**Scope:** contextflow bridge, helper APIs, execution configs. (No UI, Server, or Agent Framework)
-
-**After Iteration 4 → PROJECT COMPLETE**
-
----
-
-## Installation
+**Installation**
 ```bash
 pip install axiomflow
 ```
 
-**Requirements:**
+**Scaffold a New Workspace**
 ```bash
-pip install axiom
-pip install contextflow
+axiomflow init my_project
 ```
 
-## Example
+**Validate Definition Files**
 ```bash
-examples/
-  support_router/
+axiomflow validate workflows/router.yaml
 ```
 
-**Run:**
+**Build Execution Plan**
 ```bash
-axiomflow run examples/support_router
+axiomflow build workflow.support_router
+```
+
+**Execute the Workflow**
+```bash
+axiomflow run workflow.support_router
+```
+
+**Launch Thin Client Local UI**
+```bash
+axiomflow-ui
 ```
 
 ---
 
-## Relationship to Axiom
-AxiomFlow depends on Axiom.
-Axiom does NOT depend on AxiomFlow.
-AxiomFlow must only use public APIs.
+## The Stack Components
 
-## Relationship to ContextFlow
-ContextFlow is the execution runtime.
-AxiomFlow uses ContextFlow to execute ExecutionPlans.
-AxiomFlow never executes plans itself.
+### CLI
+The router terminal mapping declarative inputs flawlessly to backend components devoid of executable logic states dynamically overriding pipelines manually.
 
-## Project Rules
-- Core must stay frozen
-- No architecture changes
-- No new layers
-- No runtime inside Axiom
-- No execution inside Axiom
-- No more than 4 iterations
-- After iteration 4 → release
+### DSL / Templates
+Parsers (`YAML -> Dictionary -> Axiom JSON schema configuration limits`) safely and robustly asserting schema properties using mock registry endpoints natively.
 
-## Status
-- Iteration 1 — **Done**
-- Iteration 2 — Pending
-- Iteration 3 — Pending
-- Iteration 4 — Pending
+### Runner
+The bridge sequence extracting declarative graphs mapping precisely across boundaries enforcing valid initialization directly inside ContextFlow.
+
+### Simple UI
+Allows rapid deployment, review, and editing of configuration nodes visually wrapping tightly around `CLI subprocess.run()` triggers deterministically.
+
+---
+
+## Relationship to Axiom & ContextFlow
+AxiomFlow depends entirely on Axiom.  
+Axiom does NOT depend on AxiomFlow.  
+ContextFlow operates structurally agnostic as the terminal receiver engine binding executing processes strictly according to boundaries established inside `ExecutionPlan` JSON sequences reliably.
+
+---
+
+## Project Status
+
+**Iteration Roadmaps: COMPLETE**
+- Iteration 1 — Runner Layer [✔]
+- Iteration 2 — DSL / Template Helpers [✔]
+- Iteration 3 — CLI + Tooling [✔]
+- Iteration 4 — UI + Finalization [✔]
+
+**Project Complete. Version 1.0.0 Released.**
+The project roadmap is officially concluded and structurally frozen. Zero further iterations or feature additions will occur. Only security or critical standard bug fixes will be handled natively.
 
 ## License
 MIT
