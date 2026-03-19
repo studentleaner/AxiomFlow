@@ -33,3 +33,11 @@ def load_registry_file(id: str):
 def save_registry_file(id: str, data: dict):
     from axiomstudio.services import editor
     editor.save_registry_file(id, data)
+
+def get_config():
+    from axiomstudio.services import config as conf
+    return conf.load_config()
+
+def save_config(data: dict):
+    from axiomstudio.services import config as conf
+    conf.save_config(data)
