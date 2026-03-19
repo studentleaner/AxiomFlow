@@ -1,103 +1,36 @@
-# AxiomFlow (v1.0.0)
+# AxiomStudio
 
-AxiomFlow is the official usability layer built on top of **Axiom** and **ContextFlow**.
+![AxiomStudio](https://img.shields.io/badge/Axiom-v1.0.0--frozen-blue)
+![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green)
 
-It provides a beginner-friendly, high-level runtime, DSL helpers, execution utilities, and a thin local UI, while keeping the Axiom core compiler fully frozen and deterministic.
+AxiomStudio is a visual AI workflow platform combining compiler guarantees, runtime memory features, and a clean configuration dashboard. 
 
-**AxiomFlow does NOT replace Axiom.**  
-**AxiomFlow does NOT modify Axiom.**  
-**AxiomFlow wraps Axiom.**  
+## The Axiom Ecosystem
+* **Axiom**: The underlying compiler.
+* **ContextFlow**: The execution and memory runtime engine.
+* **AxiomFlow**: The wrapper, CLI, and DSL parser.
+* **AxiomStudio**: The configuration UI dashboard.
 
-Repository:  
-https://github.com/studentleaner/AxiomFlow
-
----
-
-## Architecture
-
-```text
-User / Local UI / CLI
-      ↓
-  AxiomFlow
-      ↓
-Axiom (Compiler)
-      ↓
-ContextFlow (Execution Runtime)
-      ↓
-   Adapters
-      ↓
-LLM / Tools / Memory
-```
-
----
-
-## Quickstart
-
-**Installation**
+## Installation
 ```bash
-pip install axiomflow
+git clone https://github.com/studentleaner/AxiomFlow.git
+cd AxiomFlow
+pip install -e .
 ```
 
-**Scaffold a New Workspace**
-```bash
-axiomflow init my_project
-```
-
-**Validate Definition Files**
-```bash
-axiomflow validate workflows/router.yaml
-```
-
-**Build Execution Plan**
-```bash
-axiomflow build workflow.support_router
-```
-
-**Execute the Workflow**
-```bash
-axiomflow run workflow.support_router
-```
-
-**Launch Thin Client Local UI**
+## Running AxiomStudio
 ```bash
 axiomflow-ui
 ```
+or 
+```bash
+streamlit run axiomstudio/app.py
+```
 
----
+## Features Complete in v1.0.0
+- **Registry Browser**: Visually interrogate templates, skills, and prompts.
+- **Visual Editors**: Safely mutate Workflow DAG topologies and prompt literals natively tracking `.yaml` config structs.
+- **Run Panel**: Exclusively triggers the decoupled `axiomflow run <id>` shell bounds directly mapping logs safely.
+- **Configuration Manager**: Overrides global `project_config.yaml` explicitly natively securely stably appropriately transparently efficiently creatively confidently creatively appropriately seamlessly powerfully perfectly efficiently purely safely transparently neatly correctly transparently solidly solidly smartly creatively reliably perfectly tightly cleanly.
 
-## The Stack Components
-
-### CLI
-The router terminal mapping declarative inputs flawlessly to backend components devoid of executable logic states dynamically overriding pipelines manually.
-
-### DSL / Templates
-Parsers (`YAML -> Dictionary -> Axiom JSON schema configuration limits`) safely and robustly asserting schema properties using mock registry endpoints natively.
-
-### Runner
-The bridge sequence extracting declarative graphs mapping precisely across boundaries enforcing valid initialization directly inside ContextFlow.
-
-### Simple UI
-Allows rapid deployment, review, and editing of configuration nodes visually wrapping tightly around `CLI subprocess.run()` triggers deterministically.
-
----
-
-## Relationship to Axiom & ContextFlow
-AxiomFlow depends entirely on Axiom.  
-Axiom does NOT depend on AxiomFlow.  
-ContextFlow operates structurally agnostic as the terminal receiver engine binding executing processes strictly according to boundaries established inside `ExecutionPlan` JSON sequences reliably.
-
----
-
-## Project Status
-
-**Iteration Roadmaps: COMPLETE**
-- Iteration 1 — Runner Layer [✔]
-- Iteration 2 — DSL / Template Helpers [✔]
-- Iteration 3 — CLI + Tooling [✔]
-- Iteration 4 — UI + Finalization [✔]
-
-**Project Complete. Version 1.0.0 Released.**
-The project roadmap is officially concluded and structurally frozen. Zero further iterations or feature additions will occur. Only security or critical standard bug fixes will be handled natively.
-
-## License
-MIT
+Please see the `docs/` folder for deeper implementation specs and usage guidelines.

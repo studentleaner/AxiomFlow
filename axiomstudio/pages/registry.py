@@ -1,45 +1,40 @@
 import streamlit as st
+import pandas as pd
 from axiomstudio import api
-import copy
 
 def render():
-    st.header("Registry Browser")
-    st.write("Browse templates, prompts, skills, and versions.")
+    st.header("📚 Registry Browser")
+    st.write("Browse templates, prompts, and skills currently available natively.")
 
     items = api.list_registry()
     if not items:
-        st.info("No registry items found.")
+        st.warning("No registry items found.")
         return
 
-    col1, col2 = st.columns(2)
+    df = pd.DataFrame(items)
+    
+    col1, col2 = st.columns([1, 2])
     with col1:
-        search_term = st.text_input("Search ID").lower()
+        type_filter = st.selectbox("Filter by Type", ["All"] + list(df["type"].unique()))
     with col2:
-        types_available = ["All"] + list(set([i.get("type", "unknown") for i in items]))
-        selected_type = st.selectbox("Filter by Type", types_available)
+        search_query = st.text_input("Search (ID or Name)")
 
-    filtered_items = []
-    for real_item in items:
-        # Deep copy to manipulate tags locally 
-        item = copy.deepcopy(real_item)
-        
-        if search_term and search_term not in item['id'].lower():
-            continue
-        if selected_type != "All" and item.get('type') != selected_type:
-            continue
-        
-        # Format tags
-        tags = item.get("tags", [])
-        if isinstance(tags, list):
-            item["tags"] = ", ".join(tags)
-            
-        filtered_items.append(item)
+    if type_filter != "All":
+        df = df[df["type"] == type_filter]
+    
+    if search_query:
+        df = df[df["id"].str.contains(search_query, case=False, na=False) | df["name"].str.contains(search_query, case=False, na=False)]
 
-    st.table(filtered_items)
+    st.markdown("---")
+    st.dataframe(df[["id", "type", "name", "description"]], use_container_width=True)
 
-    st.subheader("Item Details")
-    options = [""] + [i["id"] for i in filtered_items]
-    selected_id = st.selectbox("Select an item to view details:", options)
+    st.markdown("---")
+    st.subheader("Item Inspection")
+    selected_id = st.selectbox("Select Item to Inspect", df["id"].tolist())
+    
     if selected_id:
-        data = api.get_registry_item(selected_id)
-        st.json(data)
+        item_data = api.load_registry_item(selected_id)
+        if item_data:
+            st.json(item_data)
+        else:
+            st.error("Failed to load item.")

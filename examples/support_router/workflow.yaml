@@ -1,0 +1,20 @@
+id: support_router
+name: Customer Support Router
+description: Routes incoming customer queries to the right department using Axiom concepts.
+nodes:
+  - id: classify
+    type: LLM
+    prompt: support_classifier
+  - id: refund_handler
+    type: LLM
+    prompt: refund_agent
+  - id: technical_handler
+    type: LLM
+    prompt: technical_agent
+edges:
+  - from: classify
+    to: refund_handler
+    condition: "type == 'refund'"
+  - from: classify
+    to: technical_handler
+    condition: "type == 'technical'"

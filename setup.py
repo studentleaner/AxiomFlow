@@ -10,12 +10,13 @@ setup(
         "axiom",
         "contextflow",
         "PyYAML",
-        "streamlit"
+        "streamlit",
+        "networkx"
     ],
     entry_points={
         "console_scripts": [
             "axiomflow=axiomflow.cli.main:main",
-            "axiomflow-ui=axiomflow.ui.app:main"
+            "axiomflow-ui=axiomstudio.cli:main"
         ]
     },
     python_requires=">=3.10",

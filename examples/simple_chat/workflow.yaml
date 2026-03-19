@@ -1,0 +1,8 @@
+id: simple_chat
+name: Simple Chat
+description: A straightforward conversational wrapper.
+nodes:
+  - id: chat_node
+    type: LLM
+    prompt: chat_prompt
+edges: []

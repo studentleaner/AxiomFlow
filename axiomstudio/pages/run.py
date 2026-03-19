@@ -3,19 +3,20 @@ import json
 from axiomstudio import api
 
 def render():
-    st.header("Execute Workflow")
-    st.write("Trigger configuration endpoints executing dynamically tracking traces strictly natively gracefully elegantly successfully securely")
+    st.header("▶️ Execute Workflow")
+    st.write("Trigger configuration endpoints executing dynamically tracking traces strictly natively.")
 
     workflows = api.list_workflows()
     if not workflows:
-        st.warning("No dynamic mappings processed.")
+        st.warning("No workflows found.")
         return
 
     options = [w["id"] for w in workflows]
     selected_workflow = st.selectbox("Select Target Workflow", options)
 
+    st.markdown("---")
     st.subheader("Execution Parameters")
-    inputs_str = st.text_area("Pass parameters structurally natively cleanly safely gracefully exclusively safely successfully", value='{"test": 1}')
+    inputs_str = st.text_area("Pass parameters (JSON)", value='{"test": 1}')
     
     col1, _ = st.columns([1, 4])
     with col1:
@@ -38,23 +39,24 @@ def render():
                 
             st.subheader("Process Results")
             if result.get("stdout"):
-                st.text(result.get("stdout"))
+                st.code(result.get("stdout"))
             if result.get("stderr"):
                 st.error(result.get("stderr"))
                 
     st.markdown("---")
-    st.subheader("Execution Trace Elements")
-    logs = api.get_logs()
-    for log in logs:
-        st.text(f"[{log['timestamp']}] {log['level']}: {log['message']}")
+    colA, colB = st.columns(2)
+    with colA:
+        st.subheader("📜 Execution Trace Elements")
+        logs = api.get_logs()
+        for log in logs:
+            st.text(f"[{log['timestamp']}] {log['level']}: {log['message']}")
 
-    st.markdown("---")
-    st.subheader("Execution Node Properties")
-    st.write("Configured JSON values extracted explicitly cleanly properly decoupled structurally definitively securely purely natively explicitly.")
-    plan = api.get_last_plan()
-    if isinstance(plan, dict) and "message" in plan:
-        st.info(plan["message"])
-    elif isinstance(plan, dict) and "error" in plan:
-        st.error(plan["error"])
-    else:
-        st.json(plan)
+    with colB:
+        st.subheader("🛠️ Execution Node Properties")
+        plan = api.get_last_plan()
+        if isinstance(plan, dict) and "message" in plan:
+            st.info(plan["message"])
+        elif isinstance(plan, dict) and "error" in plan:
+            st.error(plan["error"])
+        else:
+            st.json(plan)

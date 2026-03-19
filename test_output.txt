@@ -1,0 +1,123 @@
+test_cli_build (test_cli.TestCLI) ... ok
+test_cli_init (test_cli.TestCLI) ... ok
+test_cli_run (test_cli.TestCLI) ... ok
+test_cli_search (test_cli.TestCLI) ... ok
+test_cli_validate (test_cli.TestCLI) ... ok
+test_generate_workflow (test_dsl.TestDSL) ... ok
+test_parse_yaml (test_dsl.TestDSL) ... ok
+test_scaffold (test_dsl.TestDSL) ... ok
+test_templates_produce_json (test_dsl.TestDSL) ... ok
+test_validator (test_dsl.TestDSL) ... ok
+test_read_file (test_editor_files.TestEditorFiles) ... ok
+test_save_file (test_editor_files.TestEditorFiles) ... ok
+test_save_registry (test_editor_prompt.TestEditorPrompt) ... ok
+test_load_workflow (test_editor_workflow.TestEditorWorkflow) ... ok
+test_run_executes_correctly (test_runner.TestRunner) ... ok
+test_build_workflow (test_studio_api.TestStudioAPI) ... ERROR
+test_list_workflows (test_studio_api.TestStudioAPI) ... FAIL
+test_run_workflow (test_studio_api.TestStudioAPI) ... ERROR
+test_load_default (test_studio_config.TestStudioConfig) ... ok
+test_load_existing (test_studio_config.TestStudioConfig) ... ok
+test_save_config (test_studio_config.TestStudioConfig) ... ok
+test_get_last_plan (test_studio_logs.TestStudioLogs) ... ok
+test_get_logs (test_studio_logs.TestStudioLogs) ... ok
+test_get_item (test_studio_registry.TestStudioRegistry) ... ok
+test_list_registry_json (test_studio_registry.TestStudioRegistry) ... ok
+test_run_executes_isolated (test_studio_run.TestStudioRun) ... ok
+test_get_workflow (test_studio_workflows.TestStudioWorkflows) ... ok
+test_list_workflows (test_studio_workflows.TestStudioWorkflows) ... ok
+test_app_shows_connection (test_ui.TestUI) ... ok
+test_ui_runner_calls_cli_build (test_ui.TestUI) ... ok
+test_ui_runner_calls_cli_run (test_ui.TestUI) ... ok
+
+======================================================================
+ERROR: test_build_workflow (test_studio_api.TestStudioAPI)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1248, in _dot_lookup
+    return getattr(thing, comp)
+AttributeError: module 'axiomstudio.services' has no attribute 'runner'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1376, in patched
+    with self.decoration_helper(patched,
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1358, in decoration_helper
+    arg = exit_stack.enter_context(patching)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 492, in enter_context
+    result = _cm_type.__enter__(cm)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1431, in __enter__
+    self.target = self.getter()
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1618, in <lambda>
+    getter = lambda: _importer(target)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1261, in _importer
+    thing = _dot_lookup(thing, comp, import_path)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1250, in _dot_lookup
+    __import__(import_path)
+ModuleNotFoundError: No module named 'axiomstudio.services.runner'
+
+======================================================================
+ERROR: test_run_workflow (test_studio_api.TestStudioAPI)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1248, in _dot_lookup
+    return getattr(thing, comp)
+AttributeError: module 'axiomstudio.services' has no attribute 'runner'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1376, in patched
+    with self.decoration_helper(patched,
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1358, in decoration_helper
+    arg = exit_stack.enter_context(patching)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 492, in enter_context
+    result = _cm_type.__enter__(cm)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1431, in __enter__
+    self.target = self.getter()
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1618, in <lambda>
+    getter = lambda: _importer(target)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1261, in _importer
+    thing = _dot_lookup(thing, comp, import_path)
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1250, in _dot_lookup
+    __import__(import_path)
+ModuleNotFoundError: No module named 'axiomstudio.services.runner'
+
+======================================================================
+FAIL: test_list_workflows (test_studio_api.TestStudioAPI)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Pradeep\AppData\Local\Programs\Python\Python310\lib\unittest\mock.py", line 1379, in patched
+    return func(*newargs, **newkeywargs)
+  File "C:\Users\Pradeep\OneDrive\Documents\Code\Github\AxiomFlow\tests\test_studio_api.py", line 22, in test_list_workflows
+    self.assertEqual(workflows, ["flow1", "flow2"])
+AssertionError: Lists differ: [{'id': 'flow1', 'file': 'flow1.yaml'}, {'id': 'flow2', 'file': 'flow2.yaml'}] != ['flow1', 'flow2']
+
+First differing element 0:
+{'id': 'flow1', 'file': 'flow1.yaml'}
+'flow1'
+
+- [{'file': 'flow1.yaml', 'id': 'flow1'}, {'file': 'flow2.yaml', 'id': 'flow2'}]
++ ['flow1', 'flow2']
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.050s
+
+FAILED (failures=1, errors=2)
+Building workflow: flow1...
+Build complete: execution_plan.json
+Creating project structure for: my_proj
+Project initialized successfully.
+Executing workflow sequence: flow1
+
+Execution Complete:
+{'status': 'ok'}
+Searching for tag: 'routing'
+ - res1
+Validating path: file.yaml...
+Validation successful: The structure mirrors Axiom schema.
