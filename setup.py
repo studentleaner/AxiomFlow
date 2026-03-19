@@ -8,7 +8,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "axiom",
-        "contextflow"
+        "contextflow",
+        "PyYAML"
     ],
     python_requires=">=3.10",
 )
