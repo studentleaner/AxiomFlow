@@ -11,5 +11,10 @@ setup(
         "contextflow",
         "PyYAML"
     ],
+    entry_points={
+        "console_scripts": [
+            "axiomflow=axiomflow.cli.main:main",
+        ]
+    },
     python_requires=">=3.10",
 )
