@@ -18,8 +18,18 @@ def get_workflow(id: str):
 def run_workflow(name: str, inputs: dict):
     return run_service.run(name, inputs)
 
-def get_logs():
-    return logs.get_logs()
+def save_workflow_file(id: str, data: dict):
+    from axiomstudio.services import editor
+    editor.save_workflow_file(id, data)
 
-def get_last_plan():
-    return logs.get_last_plan()
+def load_workflow_file(id: str):
+    from axiomstudio.services import editor
+    return editor.load_workflow_file(id)
+
+def load_registry_file(id: str):
+    from axiomstudio.services import editor
+    return editor.load_registry_file(id)
+
+def save_registry_file(id: str, data: dict):
+    from axiomstudio.services import editor
+    editor.save_registry_file(id, data)
