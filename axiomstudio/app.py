@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from axiomstudio.pages import dashboard, registry, workflows
+from axiomstudio.pages import dashboard, registry, workflows, run
 
 def main():
     st.set_page_config(page_title="AxiomStudio", layout="wide")
@@ -19,6 +19,8 @@ def main():
         registry.render()
     elif selection == "Workflows":
         workflows.render()
+    elif selection == "Run":
+        run.render()
     else:
         st.warning(f"Feature '{selection}' is currently disabled in this initial implementation phase.")
         st.info("AxiomStudio integrates core logical structures flawlessly navigating seamlessly into isolated boundaries.")
