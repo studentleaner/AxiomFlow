@@ -2,10 +2,9 @@ import streamlit as st
 import sys
 import os
 
-# Ensuring paths securely anchor back routing internal mapping bounds
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from axiomstudio.pages import dashboard
+from axiomstudio.pages import dashboard, registry, workflows
 
 def main():
     st.set_page_config(page_title="AxiomStudio", layout="wide")
@@ -16,9 +15,13 @@ def main():
 
     if selection == "Dashboard":
         dashboard.render()
+    elif selection == "Registry":
+        registry.render()
+    elif selection == "Workflows":
+        workflows.render()
     else:
         st.warning(f"Feature '{selection}' is currently disabled in this initial implementation phase.")
-        st.info("AxiomStudio successfully operates Phase 1 components flawlessly natively bridging API connections securely.")
+        st.info("AxiomStudio integrates core logical structures flawlessly navigating seamlessly into isolated boundaries.")
 
 if __name__ == "__main__":
     main()
