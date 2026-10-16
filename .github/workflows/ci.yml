@@ -1,0 +1,48 @@
+name: ci
+
+# CI - AxiomFlow (Python). Verify-then-commit: this must be green to merge.
+# The package under test imports the sibling components `axiom` (Axiom/src) and
+# `contextflow` (ContextFlow repo), so CI checks them out alongside this repo and
+# puts them on PYTHONPATH instead of pip-installing (their names on PyPI are unrelated
+# packages and the local editable install of AxiomFlow declares them as deps).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: tests + coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch sibling components (Axiom, ContextFlow)
+        working-directory: ${{ github.workspace }}/..
+        run: |
+          git clone --depth 1 https://github.com/studentleaner/Axiom.git Axiom
+          git clone --depth 1 https://github.com/studentleaner/ContextFlow.git ContextFlow
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov PyYAML networkx
+          pip install "tiktoken>=0.7.0" "openai>=1.0.0" "pydantic>=2.0.0" "pydantic-settings>=2.0.0" "rich>=13.0.0"
+
+      - name: Run tests (C2)
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/../Axiom/src:${{ github.workspace }}/../ContextFlow
+        run: pytest -q
+
+      - name: Coverage floor (C3)
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/../Axiom/src:${{ github.workspace }}/../ContextFlow
+        run: pytest -q --cov=axiomflow --cov=axiomstudio --cov-report=term-missing --cov-fail-under=40
